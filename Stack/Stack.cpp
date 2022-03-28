@@ -24,10 +24,8 @@ void Push(nodeList& list, const int value)
 }
 void Pop(nodeList& list)
 {
-	assert(&list != nullptr);
 	if (list.tail == nullptr)
 	{
-		std::cout << "Stack is EMPTY!!" << std::endl;
 		std::cout << "Can't POP Anymore" << std::endl;
 		std::cout << "You must push value" << std::endl;
 		return;
@@ -49,8 +47,6 @@ void Pop(nodeList& list)
 }
 void PrintAllStackValue(const nodeList& list)
 {
-	assert(&list != nullptr);
-
 	node* p{ list.head };
 	int count{};
 	if (p == nullptr)
@@ -68,7 +64,6 @@ void PrintAllStackValue(const nodeList& list)
 }
 void DestoryStack(nodeList& list)
 {
-	assert(&list != nullptr);
 	node* p{ list.head };
 	while (p != nullptr)
 	{

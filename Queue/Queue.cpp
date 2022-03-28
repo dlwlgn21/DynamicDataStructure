@@ -24,10 +24,8 @@ void Enqueue(nodeList& list, const int value)
 }
 void Dequeue(nodeList& list)
 {
-	assert(&list != nullptr);
 	if (list.tail == nullptr)
 	{
-		std::cout << "Queue is EMPTY!!" << std::endl;
 		std::cout << "Can't Dequeue Anymore" << std::endl;
 		std::cout << "You must Enqueue value" << std::endl;
 		return;
@@ -49,8 +47,6 @@ void Dequeue(nodeList& list)
 }
 void PrintAllQueueValue(const nodeList& list)
 {
-	assert(&list != nullptr);
-
 	node* p{ list.head };
 	int count{};
 	if (p == nullptr)
@@ -68,7 +64,6 @@ void PrintAllQueueValue(const nodeList& list)
 }
 void DestoryQueue(nodeList& list)
 {
-	assert(&list != nullptr);
 	node* p{ list.head };
 	while (p != nullptr)
 	{
