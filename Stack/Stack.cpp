@@ -1,53 +1,68 @@
 #include <assert.h>
 #include <iostream>
 #include "Stack.h"
-
-void Push(nodeList& list, const int value)
+Stack::Stack(NodeList& list) : mNodeList{ list }
 {
-	node* newNode{ new node };
+
+}
+Stack::~Stack()
+{
+	Node* p{ mNodeList.head };
+	while (p != nullptr)
+	{
+		Node* next = p->next;
+		delete p;
+		p = next;
+	}
+	std::cout << "destory Stack Succes." << std::endl;
+}
+
+void Stack::Push(const int value)
+{
+	Node* newNode{ new Node };
 	assert(newNode != nullptr);
 	newNode->value = value;
 
-	if (list.head == nullptr && list.tail == nullptr)
+	if (mNodeList.head == nullptr && mNodeList.tail == nullptr)
 	{
-		list.head = newNode;
+		mNodeList.head = newNode;
 		newNode->prev = nullptr;
 	}
-	else if (list.head != nullptr)
+	else if (mNodeList.head != nullptr)
 	{
-		list.tail->next = newNode;
-		newNode->prev = list.tail;
+		mNodeList.tail->next = newNode;
+		newNode->prev = mNodeList.tail;
 	}
 	newNode->next = nullptr;
-	list.tail = newNode;
+	mNodeList.tail = newNode;
 
 }
-void Pop(nodeList& list)
+void Stack::Pop()
 {
-	if (list.tail == nullptr)
+	if (mNodeList.tail == nullptr)
 	{
 		std::cout << "Can't POP Anymore" << std::endl;
 		std::cout << "You must push value" << std::endl;
 		return;
 	}
 
-	std::cout << list.tail->value << " Poped!" << std::endl;
+	std::cout << mNodeList.tail->value << " Poped!" << std::endl;
 
-	if (list.tail == list.head) {
-		delete list.tail;
-		list.tail = nullptr;
-		list.head = nullptr;
+	if (mNodeList.tail == mNodeList.head) {
+		delete mNodeList.tail;
+		mNodeList.tail = nullptr;
+		mNodeList.head = nullptr;
 		return;
 	}
 
-	node* curNode = list.tail;
-	list.tail = list.tail->prev;
-	list.tail->next = nullptr;
+	Node* curNode = mNodeList.tail;
+	mNodeList.tail = mNodeList.tail->prev;
+	mNodeList.tail->next = nullptr;
 	delete curNode;
 }
-void PrintAllStackValue(const nodeList& list)
+void Stack::PrintAllStackValue() const
 {
-	node* p{ list.head };
+	Node* p{ mNodeList.head };
 	int count{};
 	if (p == nullptr)
 	{
@@ -62,14 +77,4 @@ void PrintAllStackValue(const nodeList& list)
 	}
 
 }
-void DestoryStack(nodeList& list)
-{
-	node* p{ list.head };
-	while (p != nullptr)
-	{
-		node* next = p->next;
-		delete p;
-		p = next;
-	}
-	std::cout << "destory Stack Succes." << std::endl;
-}
+

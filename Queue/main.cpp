@@ -20,7 +20,7 @@ void PrintInfo()
 }
 
 
-void ProcessUserInput(nodeList& queue)
+void ProcessUserInput(Queue queue)
 {
     int command{};
     bool isExit{ false };
@@ -36,11 +36,11 @@ void ProcessUserInput(nodeList& queue)
             int value;
             std::cout << "Queue Value >> ";
             std::cin >> value;
-            Enqueue(queue, value);
+            queue.Enqueue(value);
             break;
         }
         case DEQUEUE:
-            Dequeue(queue);
+            queue.Dequeue();
             break;
         case EXIT:
             isExit = true;
@@ -49,7 +49,7 @@ void ProcessUserInput(nodeList& queue)
             std::cout << "잘못된 명령어 입니다!" << std::endl;
             break;
         }
-        PrintAllQueueValue(queue);
+        queue.PrintAllQueueValue();
 
         if (isExit)
         {
@@ -60,8 +60,8 @@ void ProcessUserInput(nodeList& queue)
 }
 int main()
 {
-    nodeList list{};
+    NodeList list{};
+    Queue queue(list);
     PrintInfo();
-    ProcessUserInput(list);
-    DestoryQueue(list);
+    ProcessUserInput(queue);
 }

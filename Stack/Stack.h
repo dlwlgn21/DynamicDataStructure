@@ -1,21 +1,28 @@
 #pragma once
 
-struct node
+struct Node
 {
 	int value;
-	node* prev;
-	node* next;
+	Node* prev;
+	Node* next;
 };
-struct nodeList
+struct NodeList
 {
-	node* head{};
-	node* tail{};
+	Node* head{};
+	Node* tail{};
+};
+class Stack
+{
+private:
+	NodeList mNodeList;
+public:
+	Stack(NodeList& list);
+	~Stack();
+	void Push(const int value);
+
+	void Pop();
+
+	void PrintAllStackValue() const;
+
 };
 
-void Push(nodeList& list, int value);
-
-void Pop(nodeList& list);
-
-void PrintAllStackValue(const nodeList& head);
-
-void DestoryStack(nodeList& head);

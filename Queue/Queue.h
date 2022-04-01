@@ -1,20 +1,28 @@
 #pragma once
-struct node
+
+struct Node
 {
 	int value;
-	node* prev;
-	node* next;
+	Node* prev;
+	Node* next;
 };
-struct nodeList
+struct NodeList
 {
-	node* head{};
-	node* tail{};
+	Node* head{};
+	Node* tail{};
 };
 
-void Enqueue(nodeList& list, int value);
+class Queue
+{
+private:
+	NodeList mNodeList;
+public:
+	Queue(NodeList& list);
+	~Queue();
+	void Enqueue(const int value);
 
-void Dequeue(nodeList& list);
+	void Dequeue();
 
-void PrintAllQueueValue(const nodeList& head);
+	void PrintAllQueueValue() const;
 
-void DestoryQueue(nodeList& head);
+};

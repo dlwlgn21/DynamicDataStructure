@@ -20,7 +20,7 @@ void PrintInfo()
 }
 
 
-void ProcessUserInput(nodeList& stack)
+void ProcessUserInput(Stack& stack)
 {
     int command{};
     bool isExit{ false };
@@ -36,11 +36,11 @@ void ProcessUserInput(nodeList& stack)
             int value;
             std::cout << "Push Value >> ";
             std::cin >> value;
-            Push(stack, value);
+            stack.Push(value);
             break;
         }
         case POP:
-            Pop(stack);
+            stack.Pop();
             break;
         case EXIT:
             isExit = true;
@@ -49,7 +49,7 @@ void ProcessUserInput(nodeList& stack)
             std::cout << "잘못된 명령어 입니다!" << std::endl;
             break;
         }
-        PrintAllStackValue(stack);
+        stack.PrintAllStackValue();
 
         if (isExit)
         {
@@ -60,8 +60,8 @@ void ProcessUserInput(nodeList& stack)
 }
 int main()
 {
-    nodeList list{};
+    NodeList list{};
+    Stack stack(list);
     PrintInfo();
-    ProcessUserInput(list);
-    DestoryStack(list);
+    ProcessUserInput(stack);
 }

@@ -2,52 +2,56 @@
 #include <iostream>
 #include "Queue.h"
 
-void Enqueue(nodeList& list, const int value)
+Queue::Queue(NodeList& list) : mNodeList{ list }
 {
-	node* newNode{ new node };
+}
+
+void Queue::Enqueue(const int value)
+{
+	Node* newNode{ new Node };
 	assert(newNode != nullptr);
 	newNode->value = value;
 
-	if (list.head == nullptr && list.tail == nullptr)
+	if (mNodeList.head == nullptr && mNodeList.tail == nullptr)
 	{
-		list.head = newNode;
+		mNodeList.head = newNode;
 		newNode->prev = nullptr;
 	}
-	else if (list.head != nullptr)
+	else if (mNodeList.head != nullptr)
 	{
-		list.tail->next = newNode;
-		newNode->prev = list.tail;
+		mNodeList.tail->next = newNode;
+		newNode->prev = mNodeList.tail;
 	}
 	newNode->next = nullptr;
-	list.tail = newNode;
+	mNodeList.tail = newNode;
 
 }
-void Dequeue(nodeList& list)
+void Queue::Dequeue()
 {
-	if (list.tail == nullptr)
+	if (mNodeList.tail == nullptr)
 	{
 		std::cout << "Can't Dequeue Anymore" << std::endl;
 		std::cout << "You must Enqueue value" << std::endl;
 		return;
 	}
 
-	std::cout << list.head->value << " Dequeued!!" << std::endl;
+	std::cout << mNodeList.head->value << " Dequeued!!" << std::endl;
 
-	if (list.tail == list.head) {
-		delete list.tail;
-		list.tail = nullptr;
-		list.head = nullptr;
+	if (mNodeList.tail == mNodeList.head) {
+		delete mNodeList.tail;
+		mNodeList.tail = nullptr;
+		mNodeList.head = nullptr;
 		return;
 	}
 
-	node* curNode = list.head;
-	list.head = list.head->next;
-	list.head->prev = nullptr;
+	Node* curNode = mNodeList.head;
+	mNodeList.head = mNodeList.head->next;
+	mNodeList.head->prev = nullptr;
 	delete curNode;
 }
-void PrintAllQueueValue(const nodeList& list)
+void Queue::PrintAllQueueValue() const
 {
-	node* p{ list.head };
+	Node* p{ mNodeList.head };
 	int count{};
 	if (p == nullptr)
 	{
@@ -62,12 +66,12 @@ void PrintAllQueueValue(const nodeList& list)
 	}
 
 }
-void DestoryQueue(nodeList& list)
+Queue::~Queue()
 {
-	node* p{ list.head };
+	Node* p{ mNodeList.head };
 	while (p != nullptr)
 	{
-		node* next = p->next;
+		Node* next = p->next;
 		delete p;
 		p = next;
 	}
