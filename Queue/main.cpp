@@ -20,7 +20,7 @@ void PrintInfo()
 }
 
 
-void ProcessUserInput(Queue queue)
+void ProcessUserInput(Queue& queue)
 {
     int command{};
     bool isExit{ false };
